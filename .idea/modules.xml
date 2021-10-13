@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KotlinDsl.iml" filepath="$PROJECT_DIR$/.idea/modules/KotlinDsl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/KotlinDsl.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/KotlinDsl.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KotlinDsl.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/KotlinDsl.buildSrc.iml" />
+    </modules>
+  </component>
+</project>
