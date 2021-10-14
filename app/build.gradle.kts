@@ -1,51 +1,96 @@
-import com.faaadi.apps.kotlindsl.config.ConfigData
-import com.faaadi.apps.kotlindsl.config.Deps
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.faaadi.apps.kotlindsl.config.Apps
+import com.faaadi.apps.kotlindsl.config.Libs
+import com.faaadi.apps.kotlindsl.config.Modules
 
 plugins {
     id("com.android.application")
+    kotlin("android")
+    kotlin("android.extensions")
+    kotlin("kapt")
     id("kotlin-android")
+    id("androidx.navigation.safeargs")
+    id("dagger.hilt.android.plugin")
+}
+apply {
+    plugin("kotlin-android")
 }
 
+
 android {
-    compileSdkVersion(ConfigData.compileSdkVersion)
+    compileSdkVersion(Apps.compileSdk)
+    buildToolsVersion = Apps.buildToolsVersion
+
 
     defaultConfig {
-        applicationId = ConfigData.applicationId
-        minSdkVersion(ConfigData.minSdkVersion)
-        targetSdkVersion(ConfigData.targetSdkVersion)
-        versionCode = ConfigData.versionCode
-        versionName = ConfigData.versionName
-
-
+        applicationId =  Apps.applicationID
+        minSdkVersion(Apps.minSdk)
+        targetSdkVersion(Apps.targetSdk)
+        versionCode = Apps.versionCode
+        versionName = Apps.versionName
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+    }
+    buildFeatures {
+        dataBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "1.8"
-        }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    sourceSets {
+        getByName("main").java.srcDirs("build/generated/source/navigation-args")
+    }
+    lintOptions.isAbortOnError = false
+    lintOptions.isCheckReleaseBuilds = false
 }
-
 dependencies {
-    implementation(Deps.kotlin)
-    implementation(Deps.appCompat)
-    implementation(Deps.materialDesign)
-    implementation(Deps.timber)
-    implementation(Deps.constraintLayout)
-    testImplementation(Deps.junit)
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(Libs.kotlin)
+    implementation(Libs.appcompat)
+    implementation(Libs.coreKtx)
+    implementation(Libs.constraintLayout)
+
+
+    // Hilt
+    implementation(Libs.hiltCore)
+    implementation(Libs.hiltCommon)
+    implementation(Libs.hiltViewModelLifecycle)
+    kapt(Libs.hiltDaggerAndroidCompiler)
+    kapt(Libs.hiltCompiler)
+
+    // Navigation
+    implementation(Libs.navComponentFragment)
+    implementation(Libs.navComponentUi)
+
+    // Okhttp
+    implementation(Libs.okHttp)
+    implementation(Libs.okHttpLogging)
+
+    // Retrofit
+    implementation(Libs.retrofit)
+
+    // Gson
+    implementation(Libs.gson)
+
+    //MDC
+    implementation(Libs.MDC)
+
+//    implementation(project(Modules.central))
+//
+//    //Cat fun facts modules
+//    implementation(project(Modules.catfunfacts))
+//
+    //Dog fun facts modules
+    implementation(project(Modules.dogfunfacts))
+
+}
+repositories {
+    maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
+    mavenCentral()
 }

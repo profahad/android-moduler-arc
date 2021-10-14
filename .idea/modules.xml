@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/KotlinDsl.iml" filepath="$PROJECT_DIR$/.idea/modules/KotlinDsl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/KotlinDsl.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/KotlinDsl.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/KotlinDsl.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/KotlinDsl.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dogFunFacts/KotlinDsl.dogFunFacts.iml" filepath="$PROJECT_DIR$/.idea/modules/dogFunFacts/KotlinDsl.dogFunFacts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/networkCore/KotlinDsl.networkCore.iml" filepath="$PROJECT_DIR$/.idea/modules/networkCore/KotlinDsl.networkCore.iml" />
     </modules>
   </component>
 </project>
